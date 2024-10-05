@@ -1,5 +1,6 @@
 import React from "react"
 import HomeComponent from "./components/home/home.jsx"
+import ContactComponent from "./components/contact/contact.jsx"
 
 function App() {
   
@@ -7,6 +8,7 @@ function App() {
    
       <section>
            <HomeComponent/> 
+           <ContactComponent/>
       </section>
  
 )
