@@ -3,13 +3,13 @@ import nodemailer from 'nodemailer';
 import sequelize from './DataBase/database.js'; 
 import corsConfig from './config/corsConfig.js';
 import { userRouter } from './Routers/user.router.js';
-
+import { setupSwagger } from './docs/swaggerConfig.js';
 
 export const app = express();
 const Port = process.env.Port || 3000;
 app.use(express.json()); 
 app.use(corsConfig)
-
+setupSwagger(app);
 
 
 
