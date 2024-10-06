@@ -1,5 +1,6 @@
 import React from "react"
 import HomeComponent from "./components/home/home.jsx"
+import Footer from "./components/footer/footer.jsx"
 
 function App() {
   
@@ -7,6 +8,7 @@ function App() {
    
       <section>
            <HomeComponent/> 
+           <Footer/>
       </section>
  
 )
