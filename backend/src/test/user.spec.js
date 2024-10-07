@@ -29,7 +29,7 @@ describe('Testes da rota POST /api/user', () => {
         User.create.mockResolvedValue(novoUser);
         
         const resposta = await request(app)
-            .post("/api/user")
+            .post("/user/new")
             .send(novoUser);
 
         expect(resposta.status).toBe(201);
