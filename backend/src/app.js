@@ -4,7 +4,7 @@ import { feedbackRouter } from "./Routers/feedback.router.js";
 
 const app = express();
 
-app.use(cors());
+//app.use(cors());
 
 app.use(express.json());
 
