@@ -10,8 +10,8 @@ app.use(express.json());
 
 app.use('/feedback', feedbackRouter);
 
-const PORT = 3000;
+//const PORT = 3000;
 
-app.listen(PORT, () => {
-    console.log(`Nosso app tá rodando na porta: http://localhost:${PORT}`);
-});
+//app.listen(PORT, () => {
+    //console.log(`Nosso app tá rodando na porta: http://localhost:${PORT}`);
+//});
