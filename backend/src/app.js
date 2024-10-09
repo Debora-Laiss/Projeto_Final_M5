@@ -1,9 +1,11 @@
+
 import express from 'express';
 import nodemailer from 'nodemailer';
 import sequelize from './DataBase/database.js'; 
 import corsConfig from './config/corsConfig.js';
 import { userRouter } from './Routers/user.router.js';
 import { setupSwagger } from './docs/swaggerConfig.js';
+import { feedbackRouter } from "./Routers/feedback.router.js";  
 
 export const app = express();
 const Port = process.env.Port || 3000;
@@ -12,6 +14,7 @@ app.use(corsConfig)
 setupSwagger(app);
 
 
+app.use('/feedback', feedbackRouter);
 
 app.use('/api', userRouter);
 
@@ -50,4 +53,6 @@ sequelize
 	.catch((erro) => {
 		console.error("Não foi possível conectar no banco de dados", erro);
 	});
+
+
 
