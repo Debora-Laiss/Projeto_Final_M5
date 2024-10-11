@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import "./header.css";
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
@@ -77,7 +78,8 @@ function HeaderComponent(props) {
             <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                 {navItems.map((item) => (
                 <Button key={item} sx={{ color: '#fff' }}>
-                    {item}
+                    {item === 'Home' ? <Link to="/">{item}</Link> : <Link to={`/${item.toLowerCase()}`}>{item}</Link>}
+                    
                 </Button>
                 ))}
             </Box>
