@@ -3,6 +3,8 @@ import nodemailer from 'nodemailer';
 import sequelize from './DataBase/database.js'; 
 import corsConfig from './config/corsConfig.js';
 import { userRouter } from './Routers/user.router.js';
+import { goalRouter } from './Routers/goals.router.js'; 
+
 import { setupSwagger } from './docs/swaggerConfig.js';
 
 export const app = express();
@@ -14,6 +16,7 @@ setupSwagger(app);
 
 
 app.use('/api', userRouter);
+app.use('/goal', goalRouter);
 
 
 // Código do Nodemailer (mantido comentado, caso não esteja sendo usado no momento)
