@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+
+.home-img{
+    background-image: url("img.webp");
+    background-size: cover;
+    background-position: center;
+    height: 980px;
+    width: auto;
+    align-items: center;
+    justify-content: center;
+}
+.title-font {
+    font-family: 'Bungee', fantasy;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #3f51b5;
+  }
+  
+  .body-font {
+    font-family: 'Bungee', fantasy;
+    font-size: 1.2rem;
+    color: #333;
+  }
+  
+  .custom-button {
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 25px;
+    background-color: #007BFF;
+    transition: background-color 0.3s ease;
+  }
+  
+  .custom-button:hover {
+    background-color: #0056b3;
+  }       
