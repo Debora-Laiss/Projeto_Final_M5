@@ -1,110 +1,50 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
-import Drawer from '@mui/material/Drawer';
-import IconButton from '@mui/material/IconButton';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import MenuIcon from '@mui/icons-material/Menu';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
+import React, { useState } from "react";
+import { Box, Grid, Typography, Button } from '@mui/material';
+import './home.css';
 
-const drawerWidth = 240;
-const navItems = ['Home', 'About', 'Contact'];
 
-function HomeComponent(props) {
-  const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+const Home = () => {
+  const [showMore, setShowMore] = useState(false);
 
-  const handleDrawerToggle = () => {
-    setMobileOpen((prevState) => !prevState);
+  const handleToggleMore = () => {
+    setShowMore(!showMore);
   };
-
-  const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
-        BEM VINDOS
-      </Typography>
-      <Divider />
-      <List>
-        {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }}>
-              <ListItemText primary={item} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
-  );
-
-  const container = window !== undefined ? () => window().document.body : undefined;
-
-  return (
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <AppBar component="nav">
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'none' } }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-          >
-            BEM VINDOS
-          </Typography>
-          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-            {navItems.map((item) => (
-              <Button key={item} sx={{ color: '#fff' }}>
-                {item}
-              </Button>
-            ))}
-          </Box>
-        </Toolbar>
-      </AppBar>
-      <nav>
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          sx={{
-            display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-          }}
-        >
-          {drawer}
-        </Drawer>
-      </nav>
-      <Box component="main" sx={{ p: 3 }}>
-        <Toolbar />
-        <Typography>
-         
+  return (  
+   
+   <section className="home"> 
+   <div className="home-img">
+    
+   </div>
+   <div className="home-container">
+      <Box className="box-titulo" sx={{ textAlign: 'center', padding: '20px' }}>
+        <Typography variant="h1" component="h1" gutterBottom className="title-font">
+          AUTISMO
         </Typography>
+        {showMore && (
+          <Typography variant="body1" className="body-font" sx={{ marginTop: '20px' }}>
+            O autismo, também conhecido como Transtorno do Espectro Autista (TEA), é uma condição relacionada 
+            ao desenvolvimento do cérebro que modifica a forma como indivíduos que estão no espectro veem e compreendem o mundo, 
+            e até a forma como se relacionam com as outras pessoas.Existe ainda uma diferença dentro do próprio espectro.
+           Cada indivíduo com autismo apresenta desafios únicos ou seja,
+            enquanto alguns conseguem realizar a maioria das atividades de vida diária sem apoio, 
+            outros, por exemplo,  precisam de ajuda até em tarefas consideradas simples.
+
+. 
+          </Typography>
+        )}
+        <Button 
+          variant="contained" 
+          color="primary" 
+          onClick={handleToggleMore}
+          className="custom-button"
+        >
+          {showMore ? "Mostrar menos" : "Saiba mais"}
+        </Button>
+        
       </Box>
-    </Box>
+    </div>
+   </section>
   );
-}
+} 
 
-HomeComponent.propTypes = {
-  window: PropTypes.func,
-};
-
-export default HomeComponent;
+export default Home;

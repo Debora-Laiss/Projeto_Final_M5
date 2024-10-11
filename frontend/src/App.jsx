@@ -1,15 +1,24 @@
 import React from "react"
-import HomeComponent from "./components/home/home.jsx"
 import ContactComponent from "./components/contact/contact.jsx"
+import Home from "./components/home/home.jsx"
+import Footer from "./components/footer/footer.jsx"
+import HeaderComponent from "./components/header/header.jsx"
+import {BrowserRoutes as Router ,Route , Routes } from "react-router-dom"
 
 function App() {
-  
+      
   return (
-   
-      <section>
-           <HomeComponent/> 
-           <ContactComponent/>
-      </section>
+   <Router>
+      <Routes>
+        <Route path="/home" element={<Home/>} />
+      </Routes>
+    </Router>
+     //  <section>                 
+     //       <HeaderComponent/> 
+     //       <Home/>
+     //       <Footer/>  
+     //       <ContactComponent/>  
+     //  </section>
  
 )
 }
