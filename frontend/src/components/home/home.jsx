@@ -30,7 +30,7 @@ const Home = () => {
             enquanto alguns conseguem realizar a maioria das atividades de vida diária sem apoio, 
             outros, por exemplo,  precisam de ajuda até em tarefas consideradas simples.
 
-. 
+
           </Typography>
         )}
         <Button 

@@ -4,6 +4,7 @@ import Home from "./components/home/home.jsx";
 import Footer from "./components/footer/footer.jsx"
 import HeaderComponent from "./components/header/header.jsx"
 import AboutComponent from "./components/about/about.jsx"
+import BasicModal from "./components/feedback/feedback.jsx";
 // import {BrowserRouter as Router ,Route , Routes } from "react-router-dom"
 // import { createTheme, ThemeProvider } from '@mui/material/styles';
 
@@ -42,6 +43,7 @@ function App() {
         <Home/>
         <AboutComponent/>
         <ContactComponent/>  
+        <BasicModal/>
         <Footer/>  
       </section>
  
