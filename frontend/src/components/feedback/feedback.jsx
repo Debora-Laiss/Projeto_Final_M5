@@ -32,8 +32,10 @@ const BasicModal = () => {
   onClick={handleOpen} 
   sx={{ 
     position: 'absolute',
-    right: '10px', 
+    right: '30px', 
+    height: '60px',
     transform: 'translateY(-50%)',
+    marginRight: '10px',
     backgroundColor: '#afb8ee', 
     color: '#fff', 
     borderRadius: '80px',
@@ -63,7 +65,6 @@ const BasicModal = () => {
           onClose={handleClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
-          sx={{borderRadius: '10px',}}
         >
           <Box sx={style}>
             <Typography id="modal-modal-title" variant="h6" component="h2">
@@ -87,13 +88,23 @@ const BasicModal = () => {
                     required   
                 />
             </Typography>
-            <Button type="submit" variant="contained" >  
+            <Button type="submit" variant="contained" sx={{ margin: '10 10px' }}>  
              Enviar 
             </Button> 
             <Button type="submit" variant="contained" sx={{ backgroundColor: 'tomato', margin: '0 10px' }}>  
              Excluir
             </Button>
- 
+            <Button type="submit" variant="contained" sx={{ backgroundColor: '#ffffff', margin: '0px' }}>  
+            <img 
+                src="./src/assets/editar.png" 
+                alt="Ícone" 
+                style={{ 
+                width: '24px', 
+                height: '24px', 
+                objectFit: 'cover' 
+            }}></img> 
+             
+            </Button>
           </Box>
         </Modal>
       </div>
