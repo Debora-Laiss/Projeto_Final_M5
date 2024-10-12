@@ -1,5 +1,5 @@
 import { goals } from "../DataBase/goals.database.js";
-import { Goal } from "../goals.model.js";
+import { Goal } from "../Models/goals.model.js";
 
 export const getAllGoals = (request, response) => {
     response.status(200).send(goals);

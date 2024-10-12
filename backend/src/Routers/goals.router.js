@@ -5,7 +5,7 @@ import {
     getAllGoals,
     getGoalById,
     updateGoalById,
-} from "../Controllers/goal.controllers.js";
+} from "../Controllers/goals.controller.js";
 
 const goalRouter = Router();
 
