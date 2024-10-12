@@ -17,11 +17,12 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
+
 const drawerWidth = 240;
 const navItems = ['Home', 'About', 'Contact'];
 
 function HeaderComponent(props) {
-  const { window } = props;
+  const { window} = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
@@ -78,7 +79,7 @@ function HeaderComponent(props) {
             <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                 {navItems.map((item) => (
                 <Button key={item} sx={{ color: '#fff' }}>
-                    {item === 'Home' ? <Link to="/">{item}</Link> : <Link to={`/${item.toLowerCase()}`}>{item}</Link>}
+                    {item}
                     
                 </Button>
                 ))}
