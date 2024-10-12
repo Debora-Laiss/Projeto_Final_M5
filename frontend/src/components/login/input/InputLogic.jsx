@@ -7,7 +7,7 @@ const InputLogic = () => {
   return (
     <>
    
-     { Atributes.map((index,item)=>(
+     { Atributes.map((item,index)=>(
         <Input
            key={index}
            type={item.type} 
