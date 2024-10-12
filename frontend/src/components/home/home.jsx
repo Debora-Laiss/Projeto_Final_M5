@@ -14,12 +14,14 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import DarkMode from '../DarkMode';
+
 
 const drawerWidth = 240;
 const navItems = ['Home', 'About', 'Contact'];
 
 function HomeComponent(props) {
-  const { window } = props;
+  const { window, darkMode, handleToggleDarkMode} = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
@@ -67,6 +69,7 @@ function HomeComponent(props) {
           >
             BEM VINDOS
           </Typography>
+          <DarkMode handleToggleDarkMode={handleToggleDarkMode}/>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
               <Button key={item} sx={{ color: '#fff' }}>
@@ -105,6 +108,8 @@ function HomeComponent(props) {
 
 HomeComponent.propTypes = {
   window: PropTypes.func,
+  darkMode: PropTypes.bool.isRequired, 
+  handleToggleDarkMode: PropTypes.func.isRequired, 
 };
 
 export default HomeComponent;

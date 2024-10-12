@@ -1,0 +1,33 @@
+.about-container {
+    background-image: linear-gradient(to right,#0071BB,#0072C1,#008A98,#008B9D, #008A99);
+    color: #fff;
+    padding: 20px; 
+    border-Radius: 8px;
+};
+
+.about-us {
+    margin-bottom: 10px;
+};
+
+.about-body {
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    line-height: 1.8;
+};
+
+.about-body2 {
+    margin-bottom: 10px;
+    line-height: 1.7;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+};
+
+.about-button {
+    background-color: #0e0d0d ;
+    padding: 14px 25px; 
+};
+
+.about-button:hover {
+    background-color:#0e0d0d;
+    box-shadow: 0 8px 20px rgba(240, 231, 231, 0.3);
+};
