@@ -4,9 +4,6 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import './about.css'; 
-import React from 'react';
-
-
 
 function About() {
     const [mostreMais, setmostreMais] = React.useState(false);
