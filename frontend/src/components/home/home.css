@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
 
 .home-img{
     background-image: url("img.webp");
@@ -9,22 +9,37 @@
     align-items: center;
     justify-content: center;
 }
-.title-font {
-    font-family: 'Bungee', fantasy;
-    font-size: 2.5rem;
+.title-font{
+    font-family: "Merriweather", serif;
+    font-weight: 900;
     font-weight: bold;
-    color: #3f51b5;
+    color:  #0b0b0b;
+    /* background: linear-gradient(to right, #0071BB, #0072C1, #008A98, #008B9D, #008A99); */
+    /* -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; */
+    
   }
-  
   .body-font {
-    font-family: 'Bungee', fantasy;
-    font-size: 1.2rem;
+    font-family: "Merriweather", serif;
+    font-weight: 900;
+    font-weight: bold;
+    color: black;
+}
+.home {
+  background-image: url("imgFundo.png");
+  background-size: cover;
+}  
+
+  .body-font {
+    font-family: "Merriweather", serif;
+    font-weight: 900;
     color: #333;
   }
   
   .custom-button {
-    font-family: 'Roboto', sans-serif;
-    font-weight: bold;
+    font-family: "Merriweather", serif;
+    font-weight: 900;
+    font-style: italic;
     padding: 10px 20px;
     border-radius: 25px;
     background-color: #007BFF;

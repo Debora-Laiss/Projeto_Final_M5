@@ -4,7 +4,7 @@ import Home from "./components/home/home.jsx";
 import Footer from "./components/footer/footer.jsx"
 import HeaderComponent from "./components/header/header.jsx"
 import AboutComponent from "./components/about/about.jsx"
-// import {BrowserRouter as Router ,Route , Routes } from "react-router-dom"
+import {BrowserRouter as Router ,Route , Routes } from "react-router-dom"
 // import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 function App() {
@@ -23,27 +23,26 @@ function App() {
       
   return (
     
-  //  <Router>
-  //    <HeaderComponent /> 
-  //     <Routes>
+  <Router>
+    <HeaderComponent /> 
+      <Routes>      
+        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/contact" element={<ContactComponent  />} />
+        <Route path="/about" element={<AboutComponent  />} />
+       
+      </Routes>
     
-       
-  //       <Route path="/" element={<Home />} />
-  //       <Route path="/home" element={<Home />} />
-  //       <Route path="/contact" element={<ContactComponent  />} />
-  //       <Route path="/about" element={<AboutComponent  />} />
-       
-  //     </Routes>
-  //     <Footer/>  
-  //   </Router>
+      <Footer/>  
+    </Router>
    
-      <section>                 
-        <HeaderComponent/> 
-        <Home/>
-        <AboutComponent/>
-        <ContactComponent/>  
-        <Footer/>  
-      </section>
+      // <section>                 
+      //   <HeaderComponent/> 
+      //   <Home/>
+      //   <AboutComponent/>
+      //   <ContactComponent/>  
+      //   <Footer/>  
+      // </section>
  
 )
 }
