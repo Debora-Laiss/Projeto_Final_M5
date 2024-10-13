@@ -1,17 +1,17 @@
 import React from 'react'
 import "./input.css"
 
-const Input = () => {
-    ({
-        type,placeholder
-    }) => {
-        
+const Input = ({type,placeholder}) => {
+            
   return (
-     <div>
+    <>
+     <div className='inputs'>
        <input type = {type} placeholder = {placeholder} />
      </div>
+     </>
   )
    
-}}
+}
 
 export default Input
+
