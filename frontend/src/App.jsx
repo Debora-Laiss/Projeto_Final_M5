@@ -10,6 +10,7 @@ import {BrowserRouter as Router ,Route , Routes } from "react-router-dom"
 function App() {
   const [users, setUsers] = useState([]);
   const [goals, setGoals] = useState([]);
+  const [feedbacks, setFeedbacks] = useState([]);
 
   useEffect(() => {
     
@@ -30,6 +31,19 @@ function App() {
 
     getAllGoals();
   }, [goals]);
+
+  useEffect(() => {
+    const loadFeedbacks = async () => {
+      try {
+        const response = await getAllFeedbacks();
+        setFeedbacks(response.data);
+      } catch (error) {
+        console.error("Erro ao buscar feedbacks:", error);
+      }
+    };
+
+    loadFeedbacks();
+  }, [feedbacks]);
   
   const addUser = async (name, age) => {
     const newUser = {
@@ -61,6 +75,16 @@ function App() {
     }
   };
 
+  const handleCreateFeedback = async (user, message) => {
+    try {
+      const response = await createFeedback(user, message);
+      setFeedbacks([...feedbacks, response.data.novoFeedback]);
+      console.log("Feedback criado com sucesso:", response.data);
+    } catch (error) {
+      console.error("Erro ao criar feedback:", error);
+    }
+  };
+
   const updateUser = async (id, updatedUser) => {
     try {
       const response = await api.put(`/api/user/update/${id}`, updatedUser);
@@ -79,7 +103,18 @@ function App() {
     } catch (error) {
         console.error('Erro ao atualizar a meta:', error);
     }
-};
+  };
+
+  const handleUpdateFeedback = async (id, user, message) => {
+    try {
+      const response = await updateFeedbackById(id, user, message);
+      setFeedbacks(feedbacks.map(f => (f.id === id ? response.data.feedbackAtualizado : f)));
+      console.log("Feedback atualizado com sucesso:", response.data);
+    } catch (error) {
+      console.error("Erro ao atualizar feedback:", error);
+    }
+  };
+
   const deleteUser = async (id) => {
     try {
       await api.delete(`/api/user/delete/${id}`);
@@ -99,6 +134,17 @@ function App() {
         console.error('Erro ao deletar a meta:', error);
     }
 };
+
+const handleDeleteFeedback = async (id) => {
+  try {
+    await deleteFeedbackById(id);
+    setFeedbacks(feedbacks.filter(f => f.id !== id));
+    console.log("Feedback deletado com sucesso.");
+  } catch (error) {
+    console.error("Erro ao deletar feedback:", error);
+  }
+};
+
   return (
     
   <Router>
