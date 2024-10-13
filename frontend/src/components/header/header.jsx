@@ -54,7 +54,7 @@ function HeaderComponent(props) {
     <div className='header'>
         <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <AppBar component="nav">
+        <AppBar component="nav" className="custom-appbar">
             <Toolbar>
             <IconButton
                 color="inherit"

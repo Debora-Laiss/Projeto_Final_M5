@@ -1,6 +1,6 @@
 import React, { useState } from 'react';  
 import { TextField, Button, Box, Typography, Alert } from '@mui/material';  
-
+import './contact.css';
 const ContactComponent = () => {  
  
   const [formData, setFormData] = useState({ nome: '', email: '', telefone: '', mensagem: '' });  
@@ -41,7 +41,9 @@ const ContactComponent = () => {
   };  
 
   return (  
-    <Box sx={{ maxWidth: 400, margin: 'auto', padding: 2, backgroundColor: '#ADD8E6' }}>  
+    <section className="contact"> 
+  
+    <Box sx={{ maxWidth: 400, margin: 'auto', padding: '20px', backgroundColor: '#ADD8E6' }}>  
       <Typography variant="h5" align="center">Fale conosco</Typography>  
       {submitted && <Alert severity="success">Mensagem enviada com sucesso!</Alert>}  
       <form onSubmit={handleSubmit}>  
@@ -97,6 +99,7 @@ const ContactComponent = () => {
         </Button>  
       </form>  
     </Box>  
+  </section>
   );  
 };  
 

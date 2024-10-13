@@ -17,7 +17,7 @@ const Home = () => {
     
    </div>
    <div className="home-container">
-      <Box className="box-titulo" sx={{ textAlign: 'center', padding: '290px',  fontStyle:  "Merriweather"}}>
+      <Box className="box-titulo" sx={{ textAlign: 'center', padding: '295px',  fontStyle:  "Merriweather"}}>
         <Typography variant="h1" component="h1" gutterBottom className="title-font" id="info-text">
           AUTISMO
         </Typography>

@@ -1,4 +1,4 @@
-import { Goal } from "../Models/goal.models.js";
+import { Goal } from "../Models/goals.model.js";
 
 export const goals = [
     new Goal(1, "Melhorar a comunicação", "Ajudar o usuário a melhor sua fala e escrita", false),

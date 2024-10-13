@@ -1,9 +1,5 @@
-.header{
-    padding: 20px;
-    height: 30px;
-    width: 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.custom-appbar {
+    background-image: linear-gradient(to right, #1896eb, #0072C1, #008A98, #008B9D, #008A99) !important;
+    color: #fff;
    
 }
