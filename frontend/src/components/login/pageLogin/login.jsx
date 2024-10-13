@@ -1,27 +1,23 @@
 import React from 'react'
-import Input from '../input/input.jsx'
+import InputLogic from '../input/InputLogic.jsx'
 import Title from '../title/title.jsx'
-import { GoogleLogin } from '@react-oauth/google'
 import "./login.css"
+import Button from '../button/button.jsx'
 
 
 const LoginPage = () => {
-    const responseGoogle = (response) => {
-        console.log(response)
-    }
+    
+  
    return (
    <>
    <form className ='main'>
       <section><Title/></section> 
       
-      <section><Input/></section>
+      <section><InputLogic/></section>
+
+      <section><Button/></section>
       
-      <section><GoogleLogin
-        clientId= "274510907410-skvirqppvngo7akhf3ksbjtn0c9jobii.apps.googleusercontent.com"
-        buttonText = "login feito com sucesso!"
-        onSuccess={responseGoogle}
-        onFailure ={console.log("erro")}
-      /></section>
+     
    </form>
       
     </>
