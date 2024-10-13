@@ -3,7 +3,7 @@
     height: 100%;
     background-color: transparent;
     outline: none;
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(3, 3, 3, 0.2);
     border-radius: 40px;
     font-size: 16px;
     color: rgb(0, 0, 0);
@@ -12,5 +12,5 @@
   }
   
   .inputs input::placeholder{
-    color: aliceblue;
+    color: rgb(17, 17, 17);
   }
