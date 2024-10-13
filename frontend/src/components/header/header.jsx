@@ -19,7 +19,7 @@ import Button from '@mui/material/Button';
 
 
 const drawerWidth = 240;
-const navItems = ['Home', 'About', 'Contact'];
+const navItems = ['loginPage','Home', 'About', 'Contact',];
 
 function HeaderComponent(props) {
   const { window} = props;
@@ -79,8 +79,7 @@ function HeaderComponent(props) {
             <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                 {navItems.map((item) => (
                 <Button key={item} sx={{ color: '#fff' }}>
-                    {item}
-                    
+                     {item === 'Home' ? <Link to="/">{item}</Link> : <Link to={`/${item.toLowerCase()}`}>{item}</Link>}
                 </Button>
                 ))}
             </Box>
@@ -104,7 +103,7 @@ function HeaderComponent(props) {
             </Drawer>
         </nav>
         <Box component="main" sx={{ p: 3 }}>
-            <Toolbar />
+            <Toolbar/>
             <Typography>
             
             </Typography>
