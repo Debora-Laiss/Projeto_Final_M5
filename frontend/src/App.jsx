@@ -1,23 +1,44 @@
 import { useState, useEffect } from 'react';
-import api from './services/apiService.jsx';
-import ContactComponent from "./components/contact/contact.jsx";
-import Home from "./components/home/home.jsx";
+import ContactComponent from "./components/contact/contact"
+import Home from "./components/home/home"
 import Footer from "./components/footer/footer.jsx"
 import HeaderComponent from "./components/header/header.jsx"
 import AboutComponent from "./components/about/about.jsx"
 import {BrowserRouter as Router ,Route , Routes } from "react-router-dom"
+import NotesList from './components/Metas/NotesList.jsx'
+import api from './services/apiService.jsx'
+import Note from './components/Metas/Note.jsx'
+import { Box, createTheme, ThemeProvider } from '@mui/material';
+import './App.css'; 
+import Search from './components/Metas/search.jsx';
+import { nanoid } from 'nanoid';
+
 
 function App() {
+  const id = nanoid();
+  const [darkMode, setDarkMode] = useState(false);
+  const [searchText, setSearchText] = useState('');
   const [users, setUsers] = useState([]);
   const [goals, setGoals] = useState([]);
   const [feedbacks, setFeedbacks] = useState([]);
+  const metas = [
+    { id: "1", title: "Meta 1", description: "Descrição da meta 1" },
+    { id: "2", title: "Meta 2", description: "Descrição da meta 2" },
+];
+  
+
+  const theme = createTheme({
+    palette: {
+      mode: darkMode ? 'dark' : 'light',
+    },
+  });
 
   useEffect(() => {
     
     api.get('/api/user/all')
       .then(response => setUsers(response.data))
       .catch(error => console.error('Error fetching users:', error));
-  }, [users]);
+  }, []);
 
   useEffect(() => {
     const getAllGoals = async () => {
@@ -32,20 +53,20 @@ function App() {
     getAllGoals();
   }, [goals]);
 
-  useEffect(() => {
-    const loadFeedbacks = async () => {
-      try {
-        const response = await getAllFeedbacks();
-        setFeedbacks(response.data);
-      } catch (error) {
-        console.error("Erro ao buscar feedbacks:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const loadFeedbacks = async () => {
+  //     try {
+  //       const response = await getAllFeedbacks();
+  //       setFeedbacks(response.data);
+  //     } catch (error) {
+  //       console.error("Erro ao buscar feedbacks:", error);
+  //     }
+  //   };
 
-    loadFeedbacks();
-  }, [feedbacks]);
+  //   loadFeedbacks();
+  // }, []);
   
-  const addUser = async (name, age) => {
+  const User = async (name, age) => {
     const newUser = {
       name,
       age,
@@ -145,23 +166,44 @@ const handleDeleteFeedback = async (id) => {
   }
 };
 
+  
+  const handleToggleDarkMode = () => setDarkMode(prev => !prev);
+
   return (
-    
-  <Router>
-    <HeaderComponent /> 
-      <Routes>      
-        <Route path="/" element={<Home />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/contact" element={<ContactComponent  />} />
-        <Route path="/about" element={<AboutComponent  />} />
-       
+    <ThemeProvider theme={theme}> 
+   <Router>
+   <HeaderComponent darkMode={darkMode} handleToggleDarkMode={handleToggleDarkMode} />
+   <Box className={`app ${darkMode ? 'dark-mode' : 'light-mode'}`}>
+     <Box className='container'>
+      <Routes>
+        <Route path="/" element={<Home handleToggleDarkMode={handleToggleDarkMode} darkMode={darkMode}/>} />
+        <Route path="/home" element={<Home  handleToggleDarkMode={handleToggleDarkMode} darkMode={darkMode}/>} />
+        <Route path="/contact" element={<ContactComponent  handleToggleDarkMode={handleToggleDarkMode} darkMode={darkMode}/>} />
+        <Route path="/about" element={<AboutComponent darkMode={darkMode} />} />
+        <Route 
+      path="/metas" 
+      element={
+        <Box>
+          <Search handleSearchNote={setSearchText}/>
+        <Note
+          notes={goals.filter((record) =>
+          record.note && record.note.toLowerCase().includes(searchText.toLowerCase())
+             )}
+           handleAddNote={createGoal}
+           handleDeleteNote={deleteGoalRecord}
+           handleUpdateNote={updateGoalRecord}
+        />  
+        </Box>
+        } />
+        <Route path="/metas" element={<NotesList />} /> 
       </Routes>
-    
-      <Footer/>  
+      </Box>
+      </Box>
+     <Footer className={darkMode ? 'dark-mode' : ''} darkMode={darkMode} handleToggleDarkMode={handleToggleDarkMode} />
     </Router>
-   
+   </ThemeProvider>
 )
-}
+};
 
 
 export default App;
