@@ -11,6 +11,6 @@ userRouter.post("/user/new", createNewUser);
 
 userRouter.delete("/user/delete/:id", deleteUserById);
 
-userRouter.put("/user/upade/:id",updateUserById);
+userRouter.put("/user/update/:id",updateUserById);
 
 export {userRouter};

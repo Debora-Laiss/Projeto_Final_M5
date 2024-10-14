@@ -5,7 +5,6 @@ import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import './about.css'; 
 
-
 function About() {
     const [mostreMais, setmostreMais] = React.useState(false);
   

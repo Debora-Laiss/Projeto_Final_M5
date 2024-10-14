@@ -3,6 +3,7 @@ import ContactComponent from "./components/contact/contact"
 import Home from "./components/home/home"
 import Footer from "./components/footer/footer.jsx"
 import HeaderComponent from "./components/header/header.jsx"
+import AboutComponent from "./components/about/about.jsx"
 import {BrowserRouter as Router ,Route , Routes } from "react-router-dom"
 import NotesList from './components/Metas/NotesList.jsx'
 import api from './components/services/service.jsx'
@@ -14,6 +15,9 @@ function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [moodRecord, setMoodRecord] = useState([]);
   const [searchText, setSearchText] = useState('');
+  const [users, setUsers] = useState([]);
+  const [goals, setGoals] = useState([]);
+  const [feedbacks, setFeedbacks] = useState([]);
 
   useEffect(() => {
     // Buscar registros de humor do backend
@@ -60,18 +64,55 @@ function App() {
     }
   };
 
-  const handleToggleDarkMode = () => {
-    setDarkMode((prevMode) => !prevMode);
+  useEffect(() => {
+    
+    api.get('/api/user/all')
+      .then(response => setUsers(response.data))
+      .catch(error => console.error('Error fetching users:', error));
+  }, [users]);
+
+  useEffect(() => {
+    const getAllGoals = async () => {
+      try {
+        const response = await api.get('/goal/goal/all');
+        setGoals(response.data); 
+      } catch (error) {
+        console.error("Erro ao buscar metas:", error);
+      }
+    };
+
+    getAllGoals();
+  }, [goals]);
+
+  useEffect(() => {
+    const loadFeedbacks = async () => {
+      try {
+        const response = await getAllFeedbacks();
+        setFeedbacks(response.data);
+      } catch (error) {
+        console.error("Erro ao buscar feedbacks:", error);
+      }
+    };
+
+    loadFeedbacks();
+  }, [feedbacks]);
+  
+  const addUser = async (name, age) => {
+    const newUser = {
+      name,
+      age,
+    };
+
+    try {
+      const response = await api.post('/api/user/new', newUser);
+      setUsers([...users, response.data.novoUser]);
+    } catch (error) {
+      console.error('Error adding user:', error);
+    }
   };
 
  
 
-  const theme = createTheme({
-    palette: {
-      mode: darkMode ? 'dark' : 'light', 
-    },
-  });
-      
   return (
     <ThemeProvider theme={theme}> 
    <Router>
@@ -100,16 +141,9 @@ function App() {
       </Box>
       <Footer/>  
     </Router>
-    </ThemeProvider>
-     //  <section>                 
-     //       <HeaderComponent/> 
-     //       <Home/>
-     //       <Footer/>  
-     //       <ContactComponent/>  
-     //  </section>
- 
+   </ThemeProvider>
 )
-}
+};
 
 
 export default App;

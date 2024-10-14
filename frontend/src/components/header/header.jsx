@@ -18,6 +18,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Switch from '@mui/material/Switch';
 
+
 const drawerWidth = 240;
 const navItems = ['Home', 'About', 'Contact', 'Metas'];
 
@@ -54,7 +55,7 @@ function HeaderComponent(props) {
     <div className='header'>
         <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <AppBar component="nav">
+        <AppBar component="nav" className="custom-appbar">
             <Toolbar>
             <IconButton
                 color="inherit"
@@ -80,7 +81,7 @@ function HeaderComponent(props) {
             <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                 {navItems.map((item) => (
                 <Button key={item} sx={{ color: '#fff' }}>
-                    {item === 'Home' ? <Link to="/">{item}</Link> : <Link to={`/${item.toLowerCase()}`}>{item}</Link>}
+                     {item === 'Home' ? <Link to="/">{item}</Link> : <Link to={`/${item.toLowerCase()}`}>{item}</Link>}
                     
                 </Button>
                 ))}
