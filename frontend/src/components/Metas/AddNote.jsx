@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import api from '../services/service.jsx'; // Importa a instância do Axios configurada
-
+import api from '../../services/apiService.jsx'; 
 const AddNote = ({ handleAddNote }) => {
 	const [noteText, setNoteText] = useState('');
 	const characterLimit = 200;

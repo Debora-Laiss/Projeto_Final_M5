@@ -1,20 +1,15 @@
-import Note from './note';
+import Note from './Note';
 import AddNote from './AddNote';
 import './search.css';
 
-const NotesList = ({
-	notes,
-	handleAddNote,
-	handleDeleteNote,
-	handleUpdateNote,
-}) => {
+const NotesList = ({ notes, handleAddNote, handleDeleteNote, handleUpdateNote }) => {
 	return (
 		<div className='notes-list'>
 			{notes.map((note) => (
 				<Note
-					key={note._id} 
+					key={note._id}
 					id={note._id}
-					text={note.note}
+					text={note.description}
 					date={note.date}
 					handleDeleteNote={handleDeleteNote}
 					handleUpdateNote={handleUpdateNote}
@@ -26,3 +21,4 @@ const NotesList = ({
 };
 
 export default NotesList;
+

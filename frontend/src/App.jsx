@@ -6,10 +6,10 @@ import HeaderComponent from "./components/header/header.jsx"
 import AboutComponent from "./components/about/about.jsx"
 import {BrowserRouter as Router ,Route , Routes } from "react-router-dom"
 import NotesList from './components/Metas/NotesList.jsx'
-import api from './components/services/service.jsx'
-import Note from './components/Metas/note.jsx'
+import api from './services/apiService.jsx'
+import Note from './components/Metas/Note.jsx'
 import { Box, createTheme, ThemeProvider } from '@mui/material';
-import './app.css'; 
+import './App.css'; 
 import Search from './components/Metas/search.jsx';
 
 function App() {

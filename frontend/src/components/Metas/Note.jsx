@@ -1,21 +1,23 @@
 import { MdDeleteForever, MdEdit } from "react-icons/md";
 import { useState } from "react";
-import api from "../services/service";
+import api from "../../services/apiService.jsx";
 import './search.css';
 
 const Note = ({ id, text, date }) => {
   const [noteText, setNoteText] = useState('');
   const [editMode, setEditMode] = useState(false);
+ 
+  
   const handleDeleteClick = async () => {
     try {
-      await api.delete(`/goal/goal${id}`);
+      await api.delete(`/goal/goal/${id}`);
     } catch (error) {
       console.error("Error deleting note:", error);
     }
-  };
+};
   const handleSaveClick = async () => {
     try {
-      const response = await api.put(`/goal/goal${id}`, {
+      const response = await api.put(`/goal/goal/${id}`, {
         note: noteText
       });
       setEditMode(!editMode);
@@ -23,8 +25,6 @@ const Note = ({ id, text, date }) => {
       console.error("Error updating note:", error);
     }
   };
-
-  // Função para atualizar o registro (exemplo: atualizando o campo "note")
   const handleUpdateClick = async () => {
   
     const updatedRecord = {
