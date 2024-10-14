@@ -8,13 +8,15 @@ const Note = ({ id, text, date }) => {
   const [editMode, setEditMode] = useState(false);
  
   
-  const handleDeleteClick = async () => {
-    try {
-      await api.delete(`/goal/goal/${id}`);
-    } catch (error) {
-      console.error("Error deleting note:", error);
-    }
-};
+   const handleDeleteClick = async (id) => {
+        try {
+            const response = await axios.delete(`http://localhost:3000/goal/goal/${id}`);
+            console.log("Meta deletada com sucesso", response.data);
+            // Adicione lógica para atualizar a interface após a exclusão
+        } catch (error) {
+            console.error("Erro ao deletar a meta:", error);
+        }
+    };
   const handleSaveClick = async () => {
     try {
       const response = await api.put(`/goal/goal/${id}`, {

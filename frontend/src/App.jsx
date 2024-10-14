@@ -11,13 +11,21 @@ import Note from './components/Metas/Note.jsx'
 import { Box, createTheme, ThemeProvider } from '@mui/material';
 import './App.css'; 
 import Search from './components/Metas/search.jsx';
+import { nanoid } from 'nanoid';
+
 
 function App() {
+  const id = nanoid();
   const [darkMode, setDarkMode] = useState(false);
   const [searchText, setSearchText] = useState('');
   const [users, setUsers] = useState([]);
   const [goals, setGoals] = useState([]);
   const [feedbacks, setFeedbacks] = useState([]);
+  const metas = [
+    { id: "1", title: "Meta 1", description: "Descrição da meta 1" },
+    { id: "2", title: "Meta 2", description: "Descrição da meta 2" },
+];
+  
 
   const theme = createTheme({
     palette: {
@@ -45,18 +53,18 @@ function App() {
     getAllGoals();
   }, [goals]);
 
-  useEffect(() => {
-    const loadFeedbacks = async () => {
-      try {
-        const response = await getAllFeedbacks();
-        setFeedbacks(response.data);
-      } catch (error) {
-        console.error("Erro ao buscar feedbacks:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const loadFeedbacks = async () => {
+  //     try {
+  //       const response = await getAllFeedbacks();
+  //       setFeedbacks(response.data);
+  //     } catch (error) {
+  //       console.error("Erro ao buscar feedbacks:", error);
+  //     }
+  //   };
 
-    loadFeedbacks();
-  }, [feedbacks]);
+  //   loadFeedbacks();
+  // }, []);
   
   const User = async (name, age) => {
     const newUser = {
