@@ -12,19 +12,18 @@ const AddNote = ({ handleAddNote }) => {
 	};
 
 	const handleSaveClick = async () => {
+		console.log('chegou')
 		if (noteText.trim().length > 0) {
-			const date = new Date().toISOString();
-			const mood = 'happy';
-			const stressLevel = 0;
-			const anxietyLevel = 0; 
+			const title = "Sair para novos lugares"; 
+			const description = noteText; 
+			const completed = false; 
 
+			const newGoal = new Goal(Date.now(), title, description, completed);
 			try {
-				await api.post('/moodRecord', {
-					date,
-					mood,
-					stress_level: stressLevel,
-					anxiety_level: anxietyLevel,
-					note: noteText,
+				await api.post('/goal/goal/new', {
+				title: newGoal.title,
+                description: newGoal.description,
+                completed: newGoal.completed
 				});
 				handleAddNote(noteText);
 				setNoteText('');

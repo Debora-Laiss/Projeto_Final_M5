@@ -10,10 +10,11 @@ import api from './components/services/service.jsx'
 import Note from './components/Metas/note.jsx'
 import { Box, createTheme, ThemeProvider } from '@mui/material';
 import './app.css'; 
+import Search from './components/Metas/search.jsx';
+
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
-  const [moodRecord, setMoodRecord] = useState([]);
   const [searchText, setSearchText] = useState('');
   const [users, setUsers] = useState([]);
   const [goals, setGoals] = useState([]);
@@ -26,56 +27,11 @@ function App() {
   });
 
   useEffect(() => {
-    // Buscar registros de humor do backend
-    api.get('/moodRecord')
-      .then(response => setMoodRecord(response.data.body))
-      .catch(error => console.error('Error fetching mood records:', error));
-  }, [moodRecord]);
-
-  const addMoodRecord = async (mood, stressLevel, anxietyLevel, note) => {
-    const date = new Date().toISOString(); // Adiciona a data atual
-    const newRecord = {
-      date,
-      mood,
-      stress_level: stressLevel,
-      anxiety_level: anxietyLevel,
-      note,
-    };
-
-    try {
-      const response = await api.post('/moodRecord', newRecord);
-      setMoodRecord([...moodRecord, response.data.body]);
-    } catch (error) {
-      console.error('Error adding mood record:', error);
-    }
-  };
-
-  // Função para atualizar um registro específico
-  const updateMoodRecord = async (id, updatedRecord) => {
-    try {
-      await api.put(`/moodRecord/${id}`);
-      setMoodRecord(moodRecord.filter((record) => record._id !== id));
-  } catch (error) {
-      console.error('Error update mood record:', error);
-  }
-  };
-
-  const deleteMoodRecord = async (id) => {
-    console.log('Attempting to delete record with ID:', id); // Verifica o ID
-    try {
-        await api.delete(`/moodRecord/${id}`);
-        setMoodRecord(moodRecord.filter((record) => record._id !== id));
-    } catch (error) {
-        console.error('Error deleting mood record:', error);
-    }
-  };
-
-  useEffect(() => {
     
     api.get('/api/user/all')
       .then(response => setUsers(response.data))
       .catch(error => console.error('Error fetching users:', error));
-  }, [users]);
+  }, []);
 
   useEffect(() => {
     const getAllGoals = async () => {
@@ -93,7 +49,7 @@ function App() {
   useEffect(() => {
     const loadFeedbacks = async () => {
       try {
-        const response = await api.get('/api/feedbacks');
+        const response = await getAllFeedbacks();
         setFeedbacks(response.data);
       } catch (error) {
         console.error("Erro ao buscar feedbacks:", error);
@@ -103,7 +59,7 @@ function App() {
     loadFeedbacks();
   }, [feedbacks]);
   
-  const addUser = async (name, age) => {
+  const User = async (name, age) => {
     const newUser = {
       name,
       age,
@@ -117,6 +73,93 @@ function App() {
     }
   };
 
+  const createGoal = async () => {
+    try {
+      const newGoal = {
+        title: "Sair para novos lugares",
+        description: "Se adpartar todos os dias",
+        completed: false
+      };
+  
+      const response = await api.post('/goal/goal/new', newGoal);
+      setGoals([...goals, response.data.novaMeta]); 
+      console.log("Meta criada com sucesso:", response.data);
+    } catch (error) {
+      console.error("Erro ao criar nova meta:", error);
+    }
+  };
+
+  const handleCreateFeedback = async (user, message) => {
+    try {
+      const response = await createFeedback(user, message);
+      setFeedbacks([...feedbacks, response.data.novoFeedback]);
+      console.log("Feedback criado com sucesso:", response.data);
+    } catch (error) {
+      console.error("Erro ao criar feedback:", error);
+    }
+  };
+
+  const updateUser = async (id, updatedUser) => {
+    try {
+      const response = await api.put(`/api/user/update/${id}`, updatedUser);
+      setUsers(users.map(user => (user.id === id ? response.data.userAtualizado : user)));
+    } catch (error) {
+      console.error('Error updating user:', error);
+    }
+  };
+
+  const updateGoalRecord = async (id, updatedGoal) => {
+    try {
+        await api.put(`/goal/${id}`, updatedGoal);  
+        setGoals(goals.map((goal) => 
+            goal.id === id ? { ...goal, ...updatedGoal } : goal
+        ));
+    } catch (error) {
+        console.error('Erro ao atualizar a meta:', error);
+    }
+  };
+
+  const handleUpdateFeedback = async (id, user, message) => {
+    try {
+      const response = await updateFeedbackById(id, user, message);
+      setFeedbacks(feedbacks.map(f => (f.id === id ? response.data.feedbackAtualizado : f)));
+      console.log("Feedback atualizado com sucesso:", response.data);
+    } catch (error) {
+      console.error("Erro ao atualizar feedback:", error);
+    }
+  };
+
+  const deleteUser = async (id) => {
+    try {
+      await api.delete(`/api/user/delete/${id}`);
+      setUsers(users.filter(user => user.id !== id));
+    } catch (error) {
+      console.error('Error deleting user:', error);
+    }
+  };
+   
+  const deleteGoalRecord = async (id) => {
+    console.log('Tentando deletar a meta com ID:', id);  
+    try {
+        
+        await api.delete(`/goal/${id}`);
+        setGoals(goals.filter((goal) => goal.id !== id));
+    } catch (error) {
+        console.error('Erro ao deletar a meta:', error);
+    }
+};
+
+const handleDeleteFeedback = async (id) => {
+  try {
+    await deleteFeedbackById(id);
+    setFeedbacks(feedbacks.filter(f => f.id !== id));
+    console.log("Feedback deletado com sucesso.");
+  } catch (error) {
+    console.error("Erro ao deletar feedback:", error);
+  }
+};
+
+  
   const handleToggleDarkMode = () => setDarkMode(prev => !prev);
 
   return (
@@ -131,17 +174,21 @@ function App() {
         <Route path="/contact" element={<ContactComponent  handleToggleDarkMode={handleToggleDarkMode} darkMode={darkMode}/>} />
         <Route path="/about" element={<AboutComponent darkMode={darkMode} />} />
         <Route 
-      path="/note" 
+      path="/metas" 
       element={
+        <Box>
+          <Search handleSearchNote={setSearchText}/>
         <Note
-          notes={moodRecord.filter((record) =>
+          notes={goals.filter((record) =>
           record.note && record.note.toLowerCase().includes(searchText.toLowerCase())
              )}
-           handleAddNote={addMoodRecord}
-           handleDeleteNote={deleteMoodRecord}
-           handleUpdateNote={updateMoodRecord}
-        /> } />
-        <Route path="/notes" element={<NotesList />} /> 
+           handleAddNote={createGoal}
+           handleDeleteNote={deleteGoalRecord}
+           handleUpdateNote={updateGoalRecord}
+        />  
+        </Box>
+        } />
+        <Route path="/metas" element={<NotesList />} /> 
       </Routes>
       </Box>
       </Box>

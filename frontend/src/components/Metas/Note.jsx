@@ -1,20 +1,21 @@
 import { MdDeleteForever, MdEdit } from "react-icons/md";
 import { useState } from "react";
 import api from "../services/service";
+import './search.css';
 
 const Note = ({ id, text, date }) => {
   const [noteText, setNoteText] = useState('');
   const [editMode, setEditMode] = useState(false);
   const handleDeleteClick = async () => {
     try {
-      await api.delete(`/moodRecord/${id}`);
+      await api.delete(`/goal/goal${id}`);
     } catch (error) {
       console.error("Error deleting note:", error);
     }
   };
   const handleSaveClick = async () => {
     try {
-      const response = await api.put(`/moodRecord/${id}`, {
+      const response = await api.put(`/goal/goal${id}`, {
         note: noteText
       });
       setEditMode(!editMode);

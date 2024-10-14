@@ -1,5 +1,6 @@
 import Note from './note';
 import AddNote from './AddNote';
+import './search.css';
 
 const NotesList = ({
 	notes,
