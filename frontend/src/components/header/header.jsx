@@ -77,7 +77,6 @@ function HeaderComponent(props) {
                 }} 
                 />
             </Typography>
-            <darkMode handleToggleDarkMode={handleToggleDarkMode}/>
             <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                 {navItems.map((item) => (
                 <Button key={item} sx={{ color: '#fff' }}>
@@ -92,6 +91,9 @@ function HeaderComponent(props) {
               inputProps={{ 'aria-label': 'dark mode toggle' }}
               sx={{ ml: 2 }}
             /> {/* alternar o dark mode */}
+             <Typography variant="body2" sx={{ color: '#fff', ml: 1 }}>
+              {darkMode ? "Modo Escuro" : "Modo Claro"}
+            </Typography>
             </Toolbar>
         </AppBar>
         <nav>

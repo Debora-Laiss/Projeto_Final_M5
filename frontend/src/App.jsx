@@ -9,7 +9,7 @@ import NotesList from './components/Metas/NotesList.jsx'
 import api from './components/services/service.jsx'
 import Note from './components/Metas/note.jsx'
 import { Box, createTheme, ThemeProvider } from '@mui/material';
-import AboutComponent from './components/about/about.jsx'
+import './app.css'; 
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -18,6 +18,12 @@ function App() {
   const [users, setUsers] = useState([]);
   const [goals, setGoals] = useState([]);
   const [feedbacks, setFeedbacks] = useState([]);
+
+  const theme = createTheme({
+    palette: {
+      mode: darkMode ? 'dark' : 'light',
+    },
+  });
 
   useEffect(() => {
     // Buscar registros de humor do backend
@@ -87,7 +93,7 @@ function App() {
   useEffect(() => {
     const loadFeedbacks = async () => {
       try {
-        const response = await getAllFeedbacks();
+        const response = await api.get('/api/feedbacks');
         setFeedbacks(response.data);
       } catch (error) {
         console.error("Erro ao buscar feedbacks:", error);
@@ -111,13 +117,13 @@ function App() {
     }
   };
 
- 
+  const handleToggleDarkMode = () => setDarkMode(prev => !prev);
 
   return (
     <ThemeProvider theme={theme}> 
    <Router>
-     <HeaderComponent darkMode={darkMode} handleToggleDarkMode={handleToggleDarkMode} /> 
-     <Box className={`app ${darkMode ? 'dark-mode' : ''}`}>
+   <HeaderComponent darkMode={darkMode} handleToggleDarkMode={handleToggleDarkMode} />
+   <Box className={`app ${darkMode ? 'dark-mode' : 'light-mode'}`}>
      <Box className='container'>
       <Routes>
         <Route path="/" element={<Home handleToggleDarkMode={handleToggleDarkMode} darkMode={darkMode}/>} />
@@ -139,7 +145,7 @@ function App() {
       </Routes>
       </Box>
       </Box>
-      <Footer/>  
+     <Footer className={darkMode ? 'dark-mode' : ''} darkMode={darkMode} handleToggleDarkMode={handleToggleDarkMode} />
     </Router>
    </ThemeProvider>
 )
