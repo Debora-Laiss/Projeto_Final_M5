@@ -16,12 +16,13 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import Switch from '@mui/material/Switch';
 
 const drawerWidth = 240;
-const navItems = ['Home', 'About', 'Contact'];
+const navItems = ['Home', 'About', 'Contact', 'Metas'];
 
 function HeaderComponent(props) {
-  const { window } = props;
+  const { window, darkMode, handleToggleDarkMode } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
@@ -75,6 +76,7 @@ function HeaderComponent(props) {
                 }} 
                 />
             </Typography>
+            <darkMode handleToggleDarkMode={handleToggleDarkMode}/>
             <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                 {navItems.map((item) => (
                 <Button key={item} sx={{ color: '#fff' }}>
@@ -83,6 +85,12 @@ function HeaderComponent(props) {
                 </Button>
                 ))}
             </Box>
+            <Switch
+              checked={darkMode}
+              onChange={handleToggleDarkMode}
+              inputProps={{ 'aria-label': 'dark mode toggle' }}
+              sx={{ ml: 2 }}
+            /> {/* alternar o dark mode */}
             </Toolbar>
         </AppBar>
         <nav>
@@ -115,6 +123,8 @@ function HeaderComponent(props) {
 
 HeaderComponent.propTypes = {
   window: PropTypes.func,
+  darkMode: PropTypes.bool.isRequired,
+  handleToggleDarkMode: PropTypes.func.isRequired,
 };
 
 export default  HeaderComponent;
