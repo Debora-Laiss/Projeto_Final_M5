@@ -12,7 +12,6 @@ import { Box, createTheme, ThemeProvider } from '@mui/material';
 import './app.css'; 
 import Search from './components/Metas/search.jsx';
 
-
 function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [searchText, setSearchText] = useState('');
