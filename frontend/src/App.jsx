@@ -5,26 +5,22 @@ import Footer from "./components/footer/footer.jsx"
 import HeaderComponent from "./components/header/header.jsx"
 import AboutComponent from "./components/about/about.jsx"
 import {BrowserRouter as Router ,Route , Routes } from "react-router-dom"
-import NotesList from './components/Metas/NotesList.jsx'
 import api from './services/apiService.jsx'
-import Note from './components/Metas/Note.jsx'
 import { Box, createTheme, ThemeProvider } from '@mui/material';
 import './App.css'; 
 import Search from './components/Metas/search.jsx';
-import { nanoid } from 'nanoid';
+import Metas from './components/Metas/Metas';
+
 
 
 function App() {
-  const id = nanoid();
+
   const [darkMode, setDarkMode] = useState(false);
   const [searchText, setSearchText] = useState('');
   const [users, setUsers] = useState([]);
   const [goals, setGoals] = useState([]);
   const [feedbacks, setFeedbacks] = useState([]);
-  const metas = [
-    { id: "1", title: "Meta 1", description: "Descrição da meta 1" },
-    { id: "2", title: "Meta 2", description: "Descrição da meta 2" },
-];
+  
   
 
   const theme = createTheme({
@@ -53,18 +49,18 @@ function App() {
     getAllGoals();
   }, [goals]);
 
-  // useEffect(() => {
-  //   const loadFeedbacks = async () => {
-  //     try {
-  //       const response = await getAllFeedbacks();
-  //       setFeedbacks(response.data);
-  //     } catch (error) {
-  //       console.error("Erro ao buscar feedbacks:", error);
-  //     }
-  //   };
+   useEffect(() => {
+     const loadFeedbacks = async () => {
+       try {
+         const response = await getAllFeedbacks();
+         setFeedbacks(response.data);
+       } catch (error) {
+         console.error("Erro ao buscar feedbacks:", error);
+       }
+     };
 
-  //   loadFeedbacks();
-  // }, []);
+     loadFeedbacks();
+   }, []);
   
   const User = async (name, age) => {
     const newUser = {
@@ -117,7 +113,7 @@ function App() {
 
   const updateGoalRecord = async (id, updatedGoal) => {
     try {
-        await api.put(`/goal/${id}`, updatedGoal);  
+        await api.put(`/goal/goal/${id}`, updatedGoal);  
         setGoals(goals.map((goal) => 
             goal.id === id ? { ...goal, ...updatedGoal } : goal
         ));
@@ -149,7 +145,7 @@ function App() {
     console.log('Tentando deletar a meta com ID:', id);  
     try {
         
-        await api.delete(`/goal/${id}`);
+        await api.delete(`/goal/goal/${id}`);
         setGoals(goals.filter((goal) => goal.id !== id));
     } catch (error) {
         console.error('Erro ao deletar a meta:', error);
@@ -180,22 +176,7 @@ const handleDeleteFeedback = async (id) => {
         <Route path="/home" element={<Home  handleToggleDarkMode={handleToggleDarkMode} darkMode={darkMode}/>} />
         <Route path="/contact" element={<ContactComponent  handleToggleDarkMode={handleToggleDarkMode} darkMode={darkMode}/>} />
         <Route path="/about" element={<AboutComponent darkMode={darkMode} />} />
-        <Route 
-      path="/metas" 
-      element={
-        <Box>
-          <Search handleSearchNote={setSearchText}/>
-        <Note
-          notes={goals.filter((record) =>
-          record.note && record.note.toLowerCase().includes(searchText.toLowerCase())
-             )}
-           handleAddNote={createGoal}
-           handleDeleteNote={deleteGoalRecord}
-           handleUpdateNote={updateGoalRecord}
-        />  
-        </Box>
-        } />
-        <Route path="/metas" element={<NotesList />} /> 
+        <Route path="/metas"  element={<Metas/>} /> 
       </Routes>
       </Box>
       </Box>
