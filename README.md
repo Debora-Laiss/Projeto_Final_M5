@@ -8,7 +8,7 @@ Este projeto full-stack crud que tem como objetivo melhorar a comunidade autista
 
 
 ```
-MINI-PROJETO-M5
+PROJETO-Final-M5
 │
 ├── backend
 │   ├── node_modules
@@ -80,7 +80,6 @@ MINI-PROJETO-M5
 - 📦 Node.js
 - 🐬 Sequelize
 - 🌐 Cors
-- 💾 Sequelize
 - 🏗️ Babel
 - 📧 Nodemailer
 - 🚀 Express
