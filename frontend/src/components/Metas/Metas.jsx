@@ -1,56 +1,131 @@
-import React, { useState } from 'react'; 
-import './Metas.css';
+import React, { useState, useEffect } from 'react';
+import api from '../../services/apiService';
+import "./Metas.css";
 
-const Metas = () => {
-  const [completedMetas, setCompletedMetas] = useState([]);
+export class Goal {
+  constructor(id, title, description, completed) {
+    this.id = id;
+    this.title = title;
+    this.description = description;
+    this.completed = completed;
+  }
+}
 
-  const metas = [
-    { id: "1", title: "Conscientizar sobre Autismo", description: "Compartilhar informações sobre o autismo nas redes sociais e em grupos de apoio para aumentar a conscientização." },
-    { id: "2", title: "Apoiar a Inclusão", description: "Promover a inclusão de pessoas autistas em atividades sociais e educacionais." },
-    { id: "3", title: "Desenvolver Empatia", description: "Participar de cursos e leituras que ajudem a entender melhor os desafios enfrentados por pessoas com autismo." },
-    { id: "4", title: "Criar Espaços Acessíveis", description: "Ajudar a desenvolver ou melhorar espaços que sejam sensoriais e socialmente acessíveis para pessoas no espectro." },
-    { id: "5", title: "Aprender Linguagem Simples", description: "Praticar a comunicação com uso de linguagem simples e direta para facilitar a interação com pessoas autistas." },
-    { id: "6", title: "Participar de Grupos de Apoio", description: "Engajar-se em grupos que apoiam famílias e indivíduos autistas para aprender mais e oferecer suporte." },
-    { id: "7", title: "Sensibilizar nas Escolas", description: "Ajudar a organizar palestras e atividades educacionais em escolas para promover a aceitação e inclusão." },
-    { id: "8", title: "Apoiar Terapias", description: "Incentivar o acesso a terapias como fonoaudiologia, terapia ocupacional e outras formas de suporte terapêutico." },
-    { id: "9", title: "Participar de Campanhas", description: "Envolver-se em campanhas de arrecadação de fundos para apoiar ONGs e instituições que ajudam no tratamento e apoio ao autismo." },
-    { id: "10", title: "Autocuidado", description: "Cuidar da saúde mental e física de si mesmo para ser um melhor suporte para a comunidade autista." },
-    { id: "11", title: "Participar de Grupos de Apoio", description: "Conecte-se com outros pais para compartilhar experiências." },
-    { id: "12", title: "Aprender sobre Autismo", description: "Dedique um tempo para ler e estudar sobre o autismo." },
-    { id: "13", title: "Promover a Inclusão Escolar", description: "Converse com a escola sobre a inclusão do seu filho." },
-    { id: "14", title: "Agendar Avaliações Profissionais", description: "Certifique-se de que seu filho faça as avaliações necessárias." },
-    { id: "15", title: "Participar de Oficinas", description: "Participe de oficinas sobre autismo e suas abordagens." },
-    { id: "16", title: "Fomentar Habilidades Sociais", description: "Crie oportunidades para seu filho interagir com outras crianças." },
-    { id: "17", title: "Incentivar Hobbies e Interesses", description: "Ajude seu filho a explorar atividades que ele goste." },
-    { id: "18", title: "Estabelecer Rotinas Consistentes", description: "Crie e mantenha rotinas para ajudar na previsibilidade." },
-    { id: "19", title: "Criar um Grupo de Leitura sobre Autismo", description: "Formar um grupo de leitura com pais e profissionais para discutir livros e recursos sobre autismo, promovendo a troca de experiências e conhecimentos." },
-    { id: "20", title: "Realizar Atividades Sensoriais", description: "Planejar e implementar atividades sensoriais que ajudem crianças autistas a explorar diferentes texturas, sons e ambientes, promovendo o desenvolvimento sensorial e social." },
-];
+const GoalPage = () => {
+  const [goals, setGoals] = useState([]);
+  const [newTitle, setNewTitle] = useState('');
+  const [newDescription, setNewDescription] = useState('');
+  const [newCompleted, setNewCompleted] = useState(false);
 
-  const handleCompleteMeta = (id) => {
-    if (!completedMetas.includes(id)) {
-      setCompletedMetas([...completedMetas, id]);
+  // Função para obter todas as metas
+  const getAllGoals = async () => {
+    try {
+      const response = await api.get('/goal/goal/all');
+      setGoals(response.data); 
+    } catch (error) {
+      console.error("Erro ao buscar metas:", error);
+    }
+  };
+
+  useEffect(() => {
+    getAllGoals();
+  }, []);
+
+  // Função para criar uma nova meta
+  const createGoal = async () => {
+    try {
+      const newGoal = {
+        title: newTitle,
+        description: newDescription,
+        completed: newCompleted,
+      };
+  
+      const response = await api.post('/goal/goal/new', newGoal);
+      setGoals([...goals, response.data.novaMeta]);
+      setNewTitle(''); // Limpar campo
+      setNewDescription(''); // Limpar campo
+      setNewCompleted(false); // Resetar estado
+      console.log("Meta criada com sucesso:", response.data);
+    } catch (error) {
+      console.error("Erro ao criar nova meta:", error);
+    }
+  };
+
+  // Função para atualizar uma meta
+  const updateGoalRecord = async (id, updatedGoal) => {
+    try {
+      await api.put(`/goal/goal/${id}`, updatedGoal);
+      setGoals(goals.map((goal) =>
+        goal.id === id ? { ...goal, ...updatedGoal } : goal
+      ));
+    } catch (error) {
+      console.error('Erro ao atualizar a meta:', error);
+    }
+  };
+
+  // Função para deletar uma meta
+  const deleteGoalRecord = async (id) => {
+    try {
+      await api.delete(`/goal/goal/${id}`);
+      setGoals(goals.filter((goal) => goal.id !== id));
+    } catch (error) {
+      console.error('Erro ao deletar a meta:', error);
     }
   };
 
   return (
-    <div className="metas-container">
-      <h2>Metas para Pais e Todos - Apoie Seus Filhos e os autistas !</h2>
-      <div className="grid-container">
-        {metas.map((meta) => (
-          <div key={meta.id} className={`meta-bloco ${completedMetas.includes(meta.id) ? 'completed' : ''}`}>
-            <h3>{meta.title}</h3>
-            <p>{meta.description}</p>
-            {!completedMetas.includes(meta.id) ? (
-              <button onClick={() => handleCompleteMeta(meta.id)} className="complete-btn">Concluir Meta!</button>
-            ) : (
-              <span className="completed-text">Meta Completa! 🎉</span>
-            )}
+    <section className='metas-page'>
+    <div>
+      <h1>Gerenciamento de Metas</h1>
+
+      {/* Formulário para criar nova meta */}
+      <div className='formMetas'>
+        <h2>Criar Nova Meta</h2>
+        <input
+          type="text"
+          placeholder="Título"
+          value={newTitle}
+          onChange={(e) => setNewTitle(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Descrição"
+          value={newDescription}
+          onChange={(e) => setNewDescription(e.target.value)}
+        />
+        <label>
+        </label>
+        <button onClick={createGoal}>Criar Meta</button>
+      </div>
+
+      {/* Lista de metas */}
+      <div className='listMetas'>
+        <h2>Metas</h2>
+        {goals.map((goal) => (
+          <div key={goal.id}>
+            <h3>{goal.title}</h3>
+            <p>{goal.description}</p>
+            
+            {/* Botão de Atualizar Meta */}
+           <button onClick={() => updateGoalRecord(goal.id, goal)}>
+            Atualizar Meta
+           </button>
+            <button onClick={() => deleteGoalRecord(goal.id)}>Deletar</button>
+            <label>
+            Concluído:
+            <input
+              type="checkbox"
+              checked={newCompleted}
+              onChange={(e) => setNewCompleted(e.target.checked)}
+            />
+          </label>
           </div>
+          
         ))}
       </div>
     </div>
+    </section>
   );
 };
 
-export default Metas;
+export default GoalPage;
