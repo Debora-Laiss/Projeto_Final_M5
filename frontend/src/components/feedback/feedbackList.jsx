@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { List, ListItem, ListItemText, Typography, Box } from '@mui/material';
-//import { getAllFeedbacks } from '../../services/feedbackApi.js';
 
 const FeedbackList = () => {
   const [feedbacks, setFeedbacks] = useState([]);
