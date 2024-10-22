@@ -2,7 +2,8 @@ import React from 'react'
 import InputLogic from '../input/InputLogic.jsx'
 import Title from '../title/title.jsx'
 import "./login.css"
-import Button from '../button/button.jsx'
+import ButtonProvider from '../buttonGoogle/buttonProvider.jsx'
+
 
 
 const LoginPage = () => {
@@ -15,7 +16,7 @@ const LoginPage = () => {
       
       <section><InputLogic/></section>
 
-      <section><Button/></section>
+      <section>/<ButtonProvider/></section>
       
      
    </form>
