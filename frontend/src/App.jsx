@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
-import api from './services/apiService.jsx';
-import ContactComponent from "./components/contact/contact.jsx";
-import Home from "./components/home/home.jsx";
+import ContactComponent from "./components/contact/contact"
+import Home from "./components/home/home"
 import Footer from "./components/footer/footer.jsx"
 import HeaderComponent from "./components/header/header.jsx"
 import AboutComponent from "./components/about/about.jsx"
@@ -11,16 +10,27 @@ import {BrowserRouter as Router ,Route , Routes } from "react-router-dom"
 // import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 function App() {
+
+  const [darkMode, setDarkMode] = useState(false);
+  const [searchText, setSearchText] = useState('');
   const [users, setUsers] = useState([]);
   const [goals, setGoals] = useState([]);
   const [feedbacks, setFeedbacks] = useState([]);
+  
+  
+
+  const theme = createTheme({
+    palette: {
+      mode: darkMode ? 'dark' : 'light',
+    },
+  });
 
   useEffect(() => {
     
     api.get('/api/user/all')
       .then(response => setUsers(response.data))
       .catch(error => console.error('Error fetching users:', error));
-  }, [users]);
+  }, []);
 
   useEffect(() => {
     const getAllGoals = async () => {
@@ -35,20 +45,20 @@ function App() {
     getAllGoals();
   }, [goals]);
 
-  useEffect(() => {
-    const loadFeedbacks = async () => {
-      try {
-        const response = await getAllFeedbacks();
-        setFeedbacks(response.data);
-      } catch (error) {
-        console.error("Erro ao buscar feedbacks:", error);
-      }
-    };
+   useEffect(() => {
+     const loadFeedbacks = async () => {
+       try {
+         const response = await getAllFeedbacks();
+         setFeedbacks(response.data);
+       } catch (error) {
+         console.error("Erro ao buscar feedbacks:", error);
+       }
+     };
 
-    loadFeedbacks();
-  }, [feedbacks]);
+     loadFeedbacks();
+   }, []);
   
-  const addUser = async (name, age) => {
+  const User = async (name, age) => {
     const newUser = {
       name,
       age,
@@ -99,7 +109,7 @@ function App() {
 
   const updateGoalRecord = async (id, updatedGoal) => {
     try {
-        await api.put(`/goal/${id}`, updatedGoal);  
+        await api.put(`/goal/goal/${id}`, updatedGoal);  
         setGoals(goals.map((goal) => 
             goal.id === id ? { ...goal, ...updatedGoal } : goal
         ));
@@ -131,7 +141,7 @@ function App() {
     console.log('Tentando deletar a meta com ID:', id);  
     try {
         
-        await api.delete(`/goal/${id}`);
+        await api.delete(`/goal/goal/${id}`);
         setGoals(goals.filter((goal) => goal.id !== id));
     } catch (error) {
         console.error('Erro ao deletar a meta:', error);
@@ -147,6 +157,9 @@ const handleDeleteFeedback = async (id) => {
     console.error("Erro ao deletar feedback:", error);
   }
 };
+
+  
+  const handleToggleDarkMode = () => setDarkMode(prev => !prev);
 
   return (
   
@@ -166,7 +179,7 @@ const handleDeleteFeedback = async (id) => {
   </Router>
  
 )
-}
+};
 
 
 export default App;

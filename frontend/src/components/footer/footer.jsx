@@ -5,9 +5,13 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GitHubIcon from "@mui/icons-material/GitHub";
 
-const Footer = () => {
+ 
+
+const Footer = ({ darkMode }) => {
   return (
-    <Box component="footer" sx={{ backgroundColor: "#f8f9fa", padding: "20px" }}>
+    <Box component="footer" sx={{    backgroundColor: darkMode ? "black" : "#f8f9fa", 
+      color: darkMode ? "white" : "black", 
+      padding: "20px"  }}>
       <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
           <Box display="flex" alignItems="center" justifyContent="center" height="100%">

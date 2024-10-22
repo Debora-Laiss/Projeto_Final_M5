@@ -16,13 +16,14 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import Switch from '@mui/material/Switch';
 
 
 const drawerWidth = 240;
 const navItems = ['loginPage','Home', 'About', 'Contact',];
 
 function HeaderComponent(props) {
-  const { window} = props;
+  const { window, darkMode, handleToggleDarkMode } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
@@ -84,6 +85,15 @@ function HeaderComponent(props) {
                 </Button>
                 ))}
             </Box>
+            <Switch
+              checked={darkMode}
+              onChange={handleToggleDarkMode}
+              inputProps={{ 'aria-label': 'dark mode toggle' }}
+              sx={{ ml: 2 }}
+            /> {/* alternar o dark mode */}
+             <Typography variant="body2" sx={{ color: '#fff', ml: 1 }}>
+              {darkMode ? "Modo Escuro" : "Modo Claro"}
+            </Typography>
             </Toolbar>
         </AppBar>
         <nav>
@@ -116,6 +126,8 @@ function HeaderComponent(props) {
 
 HeaderComponent.propTypes = {
   window: PropTypes.func,
+  darkMode: PropTypes.bool.isRequired,
+  handleToggleDarkMode: PropTypes.func.isRequired,
 };
 
 export default  HeaderComponent;
