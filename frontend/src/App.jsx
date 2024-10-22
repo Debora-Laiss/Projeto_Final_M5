@@ -178,7 +178,7 @@ const handleDeleteFeedback = async (id) => {
         <Route path="/contact" element={<ContactComponent  handleToggleDarkMode={handleToggleDarkMode} darkMode={darkMode}/>} />
         <Route path="/about" element={<AboutComponent darkMode={darkMode} />} />
         <Route path="/metas"  element={<Metas/>} /> 
-        <Route path='/login' element={<LoginPage/>}/>
+        <Route path='/loginpage' element={<LoginPage/>} />
       </Routes>
       </Box>
       </Box>

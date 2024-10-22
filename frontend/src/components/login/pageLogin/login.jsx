@@ -16,7 +16,7 @@ const LoginPage = () => {
       
       <section><InputLogic/></section>
 
-      <section>/<ButtonProvider/></section>
+      <section><ButtonProvider/></section>
       
      
    </form>
