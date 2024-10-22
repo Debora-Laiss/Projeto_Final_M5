@@ -9,7 +9,8 @@ import api from './services/apiService.jsx'
 import { Box, createTheme, ThemeProvider } from '@mui/material';
 import './App.css'; 
 import Search from './components/Metas/search.jsx';
-import Metas from './components/Metas/Metas';
+import Metas from './components/Metas/Metas.jsx';
+import LoginPage from './components/login/pageLogin/login.jsx';
 
 
 
@@ -177,6 +178,7 @@ const handleDeleteFeedback = async (id) => {
         <Route path="/contact" element={<ContactComponent  handleToggleDarkMode={handleToggleDarkMode} darkMode={darkMode}/>} />
         <Route path="/about" element={<AboutComponent darkMode={darkMode} />} />
         <Route path="/metas"  element={<Metas/>} /> 
+        <Route path='/login' element={<LoginPage/>}/>
       </Routes>
       </Box>
       </Box>
