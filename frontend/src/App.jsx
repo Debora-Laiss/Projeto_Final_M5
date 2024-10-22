@@ -4,10 +4,14 @@ import Home from "./components/home/home"
 import Footer from "./components/footer/footer.jsx"
 import HeaderComponent from "./components/header/header.jsx"
 import AboutComponent from "./components/about/about.jsx"
-
-import LoginPage from "./components/login/pageLogin/login.jsx";
 import {BrowserRouter as Router ,Route , Routes } from "react-router-dom"
-// import { createTheme, ThemeProvider } from '@mui/material/styles';
+import api from './services/apiService.jsx'
+import { Box, createTheme, ThemeProvider } from '@mui/material';
+import './App.css'; 
+import Search from './components/Metas/search.jsx';
+import Metas from './components/Metas/Metas';
+
+
 
 function App() {
 
@@ -162,22 +166,23 @@ const handleDeleteFeedback = async (id) => {
   const handleToggleDarkMode = () => setDarkMode(prev => !prev);
 
   return (
-  
-     
-  <Router>
-  <HeaderComponent /> 
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/home" element={<Home />} />
-      <Route path="/contact" element={<ContactComponent  />} />
-      <Route path="/about" element={<AboutComponent  />} />
-      <Route path="loginPage" element={<LoginPage/>}/>
-
-    </Routes>
-
-    <Footer/>
-  </Router>
- 
+    <ThemeProvider theme={theme}> 
+   <Router>
+   <HeaderComponent darkMode={darkMode} handleToggleDarkMode={handleToggleDarkMode} />
+   <Box className={`app ${darkMode ? 'dark-mode' : 'light-mode'}`}>
+     <Box className='container'>
+      <Routes>
+        <Route path="/" element={<Home handleToggleDarkMode={handleToggleDarkMode} darkMode={darkMode}/>} />
+        <Route path="/home" element={<Home  handleToggleDarkMode={handleToggleDarkMode} darkMode={darkMode}/>} />
+        <Route path="/contact" element={<ContactComponent  handleToggleDarkMode={handleToggleDarkMode} darkMode={darkMode}/>} />
+        <Route path="/about" element={<AboutComponent darkMode={darkMode} />} />
+        <Route path="/metas"  element={<Metas/>} /> 
+      </Routes>
+      </Box>
+      </Box>
+     <Footer className={darkMode ? 'dark-mode' : ''} darkMode={darkMode} handleToggleDarkMode={handleToggleDarkMode} />
+    </Router>
+   </ThemeProvider>
 )
 };
 
