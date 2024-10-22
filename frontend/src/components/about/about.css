@@ -1,8 +1,9 @@
 .about-container {
     background-image: linear-gradient(to right,#0071BB,#0072C1,#008A98,#008B9D, #008A99);
     color: #fff;
-    padding: 20px; 
+    padding: 200px; 
     border-Radius: 8px;
+    margin-top: 100px;
 };
 
 .about-us {

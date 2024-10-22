@@ -54,7 +54,7 @@ function HeaderComponent(props) {
     <div className='header'>
         <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <AppBar component="nav">
+        <AppBar component="nav" className="custom-appbar">
             <Toolbar>
             <IconButton
                 color="inherit"
@@ -80,6 +80,7 @@ function HeaderComponent(props) {
                 {navItems.map((item) => (
                 <Button key={item} sx={{ color: '#fff' }}>
                      {item === 'Home' ? <Link to="/">{item}</Link> : <Link to={`/${item.toLowerCase()}`}>{item}</Link>}
+
                 </Button>
                 ))}
             </Box>
