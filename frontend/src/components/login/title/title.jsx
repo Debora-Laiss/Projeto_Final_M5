@@ -5,7 +5,8 @@ const Title = () => {
   return (
     <div className='titles'>
       <h1>Login</h1>
-    </div>
+
+          </div>
   )
 }
 
