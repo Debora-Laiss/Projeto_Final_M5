@@ -1,33 +1,39 @@
 import React, { useState } from 'react';
 import { Box, Button, Modal, TextField, Typography, Fab } from '@mui/material';
-//import { createFeedback } from '../../.././src/services/apiService.jsx'
 import AddIcon from '@mui/icons-material/Add';
+import api from '../../.././src/services/apiService.jsx'; // Adjust the import if necessary
 
-const FeedbackModal = ({ fetchFeedbacks }) => {
-  const [user, setUser] = useState('');
-  const [message, setMessage] = useState('');
-  const [open, setOpen] = useState(false);
+const FeedbackForm = () => {
+  const [newUser, setNewUser] = useState('');
+  const [newMessage, setNewMessage] = useState('');
+  const [feedbacks, setFeedbacks] = useState([]);
+  const [open, setOpen] = useState(false); // State for managing modal visibility
 
-  
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleCreateFeedback = async () => {
+    try {
+      const newFeedback = {
+        user: newUser,
+        message: newMessage,
+      };
 
-    // Envia o feedback para a API
-    await createFeedback({ user, message });
+      const response = await api.post('/feedback/feedback/new', newFeedback); // Adjust the endpoint as needed
+      setFeedbacks([...feedbacks, response.data.novoFeedback]); // Update the feedback list
 
-    
-    fetchFeedbacks();
-    setUser('');
-    setMessage('');
-    handleClose();
+      // Clear input fields
+      setNewUser('');
+      setNewMessage('');
+
+      console.log('Feedback created successfully:', response.data);
+    } catch (error) {
+      console.error('Error creating new feedback:', error);
+    }
   };
 
   return (
     <>
-      { }
       <Fab
         color="primary"
         aria-label="add"
@@ -45,52 +51,58 @@ const FeedbackModal = ({ fetchFeedbacks }) => {
       {/* Modal */}
       <Modal open={open} onClose={handleClose}>
         <Box
+          component="form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleCreateFeedback();
+          }}
           sx={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: 400,
-            bgcolor: 'background.paper',
-            borderRadius: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 2,
+            maxWidth: 500,
+            margin: '0 auto',
+            padding: 3,
+            backgroundColor: 'white',
+            borderRadius: 2,
             boxShadow: 24,
-            p: 4,
+            mt: 4,
           }}
         >
-          <Typography variant="h6" component="h2" gutterBottom>
-            Enviar Feedback
+          <Typography variant="h6" gutterBottom>
+            Deixe seu Feedback
           </Typography>
-          <Box component="form" onSubmit={handleSubmit}>
-            <TextField
-              label="Seu nome"
-              variant="outlined"
-              fullWidth
-              value={user}
-              onChange={(e) => setUser(e.target.value)}
-              required
-              sx={{ marginBottom: 2 }}
-            />
-            <TextField
-              label="Seu feedback"
-              variant="outlined"
-              fullWidth
-              multiline
-              rows={4}
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              required
-              sx={{ marginBottom: 2 }}
-            />
-            <Button type="submit" variant="contained" color="primary" fullWidth>
-              Enviar
-            </Button>
-          </Box>
+
+          <TextField
+            label="Usuário"
+            value={newUser}
+            onChange={(e) => setNewUser(e.target.value)}
+            required
+            fullWidth
+          />
+
+          <TextField
+            label="Mensagem"
+            value={newMessage}
+            onChange={(e) => setNewMessage(e.target.value)}
+            required
+            fullWidth
+            multiline
+            rows={4}
+          />
+
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            sx={{ fontSize: '16px' }}
+          >
+            Enviar Feedback
+          </Button>
         </Box>
       </Modal>
     </>
   );
 };
 
-export default FeedbackModal;
-
-
+export default FeedbackForm;

@@ -37,6 +37,10 @@ function App() {
       .catch(error => console.error('Error fetching users:', error));
   }, []);
 
+  const getAllFeedbacks = async () => {
+    return await api.get('/feedback/feedback/all');
+  };
+
   useEffect(() => {
     const getAllGoals = async () => {
       try {
@@ -61,7 +65,7 @@ function App() {
      };
 
      loadFeedbacks();
-   }, []);
+   }, [feedbacks]);
   
   const User = async (name, age) => {
     const newUser = {
