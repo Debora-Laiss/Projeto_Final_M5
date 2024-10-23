@@ -178,13 +178,12 @@ const handleDeleteFeedback = async (id) => {
    <Box className={`app ${darkMode ? 'dark-mode' : 'light-mode'}`}>
      <Box className='container'>
       <Routes>
-        <Route path="/" element={<Home handleToggleDarkMode={handleToggleDarkMode} darkMode={darkMode}/>} />
+        <Route path="/" element={<LoginPage handleToggleDarkMode={handleToggleDarkMode} darkMode={darkMode}/>} />
         <Route path="/home" element={<Home  handleToggleDarkMode={handleToggleDarkMode} darkMode={darkMode}/>} />
         <Route path="/contact" element={<ContactComponent  handleToggleDarkMode={handleToggleDarkMode} darkMode={darkMode}/>} />
         <Route path="/about" element={<AboutComponent darkMode={darkMode} />} />
         <Route path="/metas"  element={<Metas/>} /> 
         <Route path="/friendList"  element={<FriendList/>} /> 
-        <Route path='/loginpage' element={<LoginPage/>} />
       </Routes>
       </Box>
       </Box>
