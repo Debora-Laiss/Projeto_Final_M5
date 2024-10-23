@@ -20,7 +20,7 @@ import Switch from '@mui/material/Switch';
 
 
 const drawerWidth = 240;
-const navItems = ['Home', 'About', 'Contact','Metas','LoginPage','friendList'];
+const navItems = ['Home', 'About', 'Contact','Metas','friendList'];
 
 function HeaderComponent(props) {
   const { window, darkMode, handleToggleDarkMode } = props;
