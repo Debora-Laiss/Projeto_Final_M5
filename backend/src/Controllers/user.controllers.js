@@ -58,26 +58,26 @@ export const deleteUserById = async (req, res) =>{
 
 
 export const updateUserById = async (req, res) => {
-    const idParametro = request.params.id;
+    const idParametro = req.params.id; // Corrigido de 'request' para 'req'
 
-	try {
-		const userDaRequest = req.body
-		const userParaAtualizar = await User.findByPk(idParametro)
+    try {
+        const userDaRequest = req.body;
+        const userParaAtualizar = await User.findByPk(idParametro);
 
-		if (!userParaAtualizar) {
+        if (!userParaAtualizar) {
             throw new Error("Not found");
+        }
+
+        // Atualizo o usuário com o método update
+        const userAtualizado = await userParaAtualizar.update(userDaRequest);
+
+        res.status(200).send({ // Mudado para 200 para atualizações bem-sucedidas
+            message: "Usuário atualizado com sucesso", // Corrigido a mensagem
+            userAtualizado,
+        });
+    } catch (e) {
+        res.status(404).send({
+            error: e.message,
+        });
     }
-		//atualizo ele com o método update
-		const userAtualizado = await userParaAtualizar.update(userDaRequest)
-
-		res.status(201).send({
-			message: "Usuário criado com suceso",
-			userAtualizado,
-		});
-
-	} catch (e) {
-		res.status(404).send({
-			error: e.message,
-		});
-	}
 };
