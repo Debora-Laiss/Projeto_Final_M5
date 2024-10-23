@@ -50,7 +50,7 @@ const GoalPage = () => {
   
       const response = await api.post('/goal/goal/new', newGoal);
       setGoals([...goals, response.data.novaMeta]);
-      setNewTitle(''); // Limpar campo
+      setNewTitle(''); 
       setNewDescription(''); // Limpar campo
       setNewCompleted(false); // Resetar estado
       console.log("Meta criada com sucesso:", response.data);

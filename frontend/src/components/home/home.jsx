@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Box, Grid, Typography, Button } from '@mui/material';
 import './home.css';
-import FeedbackList from '../feedback/feedbackList.jsx';
 import FeedbackModal from '../feedback/feedbackModal.jsx';
 
 const Home = () => {
@@ -57,8 +56,7 @@ const Home = () => {
       </div>
 
       <div>  
-        <h1>Feedbacks</h1>  
-        <FeedbackList />  
+       
         <FeedbackModal fetchFeedbacks={() => {}} />  
       </div>  
     </section>
