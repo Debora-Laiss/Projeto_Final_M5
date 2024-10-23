@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import ContactComponent from "./components/contact/contact"
 import Home from "./components/home/home"
+import FriendList from "./components/friendList/friendList.jsx"
 import Footer from "./components/footer/footer.jsx"
 import HeaderComponent from "./components/header/header.jsx"
 import AboutComponent from "./components/about/about.jsx"
@@ -178,6 +179,7 @@ const handleDeleteFeedback = async (id) => {
         <Route path="/contact" element={<ContactComponent  handleToggleDarkMode={handleToggleDarkMode} darkMode={darkMode}/>} />
         <Route path="/about" element={<AboutComponent darkMode={darkMode} />} />
         <Route path="/metas"  element={<Metas/>} /> 
+        <Route path="/friendList"  element={<FriendList/>} /> 
         <Route path='/loginpage' element={<LoginPage/>} />
       </Routes>
       </Box>
