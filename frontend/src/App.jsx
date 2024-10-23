@@ -9,7 +9,6 @@ import {BrowserRouter as Router ,Route , Routes } from "react-router-dom"
 import api from './services/apiService.jsx'
 import { Box, createTheme, ThemeProvider } from '@mui/material';
 import './App.css'; 
-import Search from './components/Metas/search.jsx';
 import Metas from './components/Metas/Metas.jsx';
 import LoginPage from './components/login/pageLogin/login.jsx';
 
@@ -18,7 +17,6 @@ import LoginPage from './components/login/pageLogin/login.jsx';
 function App() {
 
   const [darkMode, setDarkMode] = useState(false);
-  const [searchText, setSearchText] = useState('');
   const [users, setUsers] = useState([]);
   const [goals, setGoals] = useState([]);
   const [feedbacks, setFeedbacks] = useState([]);
