@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Box, Button, Modal, TextField, Typography, Fab } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import api from '../../.././src/services/apiService.jsx'; // Adjust the import if necessary
+import api from '../../.././src/services/apiService.jsx';
 
 const FeedbackForm = () => {
   const [newUser, setNewUser] = useState('');
   const [newMessage, setNewMessage] = useState('');
   const [feedbacks, setFeedbacks] = useState([]);
-  const [open, setOpen] = useState(false); // State for managing modal visibility
+  const [open, setOpen] = useState(false); 
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -19,8 +19,8 @@ const FeedbackForm = () => {
         message: newMessage,
       };
 
-      const response = await api.post('/feedback/feedback/new', newFeedback); // Adjust the endpoint as needed
-      setFeedbacks([...feedbacks, response.data.novoFeedback]); // Update the feedback list
+      const response = await api.post('/feedback/feedback/new', newFeedback); 
+      setFeedbacks([...feedbacks, response.data.novoFeedback]); 
 
       // Clear input fields
       setNewUser('');
