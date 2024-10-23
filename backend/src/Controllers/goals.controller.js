@@ -71,15 +71,16 @@ export const updateGoalById = (request, response) => {
             throw new Error("Meta não encontrada");
         }
 
-        goalAtualizar.title = goalDaRequest.title || goalAtualizar.title;
-        goalAtualizar.description = goalDaRequest.description || goalAtualizar.description;
-        goalAtualizar.completed = goalDaRequest.completed !== undefined ? goalDaRequest.completed : goalAtualizar.completed;
+        goalParaAtualizar.title = goalDaRequest.title || goalParaAtualizar.title;
+        goalParaAtualizar.description = goalDaRequest.description || goalParaAtualizar.description;
+        goalParaAtualizar.completed = goalDaRequest.completed !== undefined ? goalDaRequest.completed : goalParaAtualizar.completed;
 
         response.status(200).send({
             message: "Meta atualizada com sucesso",
-            metaAtualizada: goalAtualiza,
+            metaAtualizada: goalParaAtualizar,
         });
     } catch (e) {
+       
         response.status(404).send({
             error: e.message,
         });

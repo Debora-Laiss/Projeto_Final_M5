@@ -16,6 +16,14 @@ const GoalPage = () => {
   const [newTitle, setNewTitle] = useState('');
   const [newDescription, setNewDescription] = useState('');
   const [newCompleted, setNewCompleted] = useState(false);
+  const [completedMetas, setCompletedMetas] = useState([]);
+
+
+  const handleCompleteMeta = (id) => {
+    if (!completedMetas.includes(id)) {
+      setCompletedMetas([...completedMetas, id]);
+    }
+  };
 
   // Função para obter todas as metas
   const getAllGoals = async () => {
@@ -51,17 +59,29 @@ const GoalPage = () => {
     }
   };
 
-  // Função para atualizar uma meta
-  const updateGoalRecord = async (id, updatedGoal) => {
+  const editAndUpdateGoal = async (goalId) => {
+    const updatedGoal = {
+      title: newTitle, // Certifique-se de que newTitle está sendo preenchido corretamente
+      description: newDescription, // Certifique-se de que newDescription está sendo preenchido corretamente
+    };
+  
+    console.log("Atualizando meta com ID:", goalId);
+    console.log("Dados a serem enviados:", updatedGoal);
+  
     try {
-      await api.put(`/goal/goal/${id}`, updatedGoal);
+      const response = await api.put(`/goal/goal/${goalId}`, updatedGoal);
+  
+      // Atualiza a lista de metas com a meta modificada
       setGoals(goals.map((goal) =>
-        goal.id === id ? { ...goal, ...updatedGoal } : goal
+        goal.id === goalId ? { ...goal, ...updatedGoal } : goal
       ));
+  
+      console.log('Meta atualizada com sucesso:', response.data);
     } catch (error) {
       console.error('Erro ao atualizar a meta:', error);
     }
   };
+  
 
   // Função para deletar uma meta
   const deleteGoalRecord = async (id) => {
@@ -96,6 +116,7 @@ const GoalPage = () => {
         <label>
         </label>
         <button onClick={createGoal}>Criar Meta</button>
+        
       </div>
 
       {/* Lista de metas */}
@@ -106,19 +127,19 @@ const GoalPage = () => {
             <h3>{goal.title}</h3>
             <p>{goal.description}</p>
             
-            {/* Botão de Atualizar Meta */}
-           <button onClick={() => updateGoalRecord(goal.id, goal)}>
-            Atualizar Meta
-           </button>
+          {/* Botão para editar e atualizar a meta */}
+          <button onClick={() => editAndUpdateGoal(goal.id)}>
+              Atualizar Meta
+            </button>
+
+            {/* Botão de Deletar Meta */}
             <button onClick={() => deleteGoalRecord(goal.id)}>Deletar</button>
-            <label>
-            Concluído:
-            <input
-              type="checkbox"
-              checked={newCompleted}
-              onChange={(e) => setNewCompleted(e.target.checked)}
-            />
-          </label>
+           {/* Missao concluida */}
+            {!completedMetas.includes(goal.id) ? (
+              <button onClick={() => handleCompleteMeta(goal.id)} className="complete-btn">Concluir Meta!</button>
+            ) : (
+              <span className="completed-text">🎉 Meta Completa! 🎉</span>
+            )}
           </div>
           
         ))}
