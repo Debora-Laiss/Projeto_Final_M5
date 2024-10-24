@@ -4,6 +4,10 @@
 
 Este projeto full-stack crud que tem como objetivo melhorar a comunidade autista trazendo implementações para a mesma.
 
+## Sobre
+
+ O Elo-Vivo é uma iniciativa que visa ajudar a comunidade autista. Nesse site, os pais e responsáveis de pessoas no espectro podem organizar a rotina e melhorar o dia a dia de seus filhos.
+ 
 ### Estrutura de Arquivos 📄
 
 
@@ -467,7 +471,11 @@ Se desejar contribuir com o projeto, siga os passos abaixo:
 4. Push para a branch: `git push origin minha-feature`.
 5. Abra um Pull Request.
 
+## Deploy
+https://projeto-final-m5-4.onrender.com
+
 ## Licença
 
 © *Squad 3*. 
 <img  width=100% src="https://capsule-render.vercel.app/api?type=waving&color=1E90FF&height=120&section=footer"/>
+
