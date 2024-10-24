@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon src/app.js",
-    "build": "cd ../frontend && npm install && npm run build",
-    "start": "npm run build && node src/app.js"
+    "dev": "nodemon src/app.js"
+    
   },
   "author": "",
   "license": "ISC",
