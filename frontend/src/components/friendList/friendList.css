@@ -6,7 +6,7 @@
   display: flex;
 }
 
-.users-page h1, h2 {
+.users-page h1, .users-page h2 {
   color: #008A99;
   font-family: "Merriweather", serif;
   font-weight: bold;
