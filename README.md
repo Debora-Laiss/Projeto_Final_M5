@@ -4,6 +4,10 @@
 
 Este projeto full-stack crud que tem como objetivo melhorar a comunidade autista trazendo implementações para a mesma.
 
+## Sobre
+
+ O Elo-Vivo é uma iniciativa que visa ajudar a comunidade autista. Nesse site, os pais e responsáveis de pessoas no espectro podem organizar a rotina e melhorar o dia a dia de seus filhos.
+ 
 ### Estrutura de Arquivos 📄
 
 
