@@ -471,7 +471,11 @@ Se desejar contribuir com o projeto, siga os passos abaixo:
 4. Push para a branch: `git push origin minha-feature`.
 5. Abra um Pull Request.
 
+## Deploy
+https://projeto-final-m5-4.onrender.com
+
 ## Licença
 
 © *Squad 3*. 
 <img  width=100% src="https://capsule-render.vercel.app/api?type=waving&color=1E90FF&height=120&section=footer"/>
+
