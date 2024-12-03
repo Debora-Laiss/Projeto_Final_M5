@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Box, Grid, Typography, Button } from '@mui/material';
 import './home.css';
-import FeedbackModal from '../feedback/feedbackModal.jsx';
+import FeedbackModal from '../../components/feedback/feedbackModal.jsx';  
 
 const Home = () => {
   const [showMore, setShowMore] = useState(false);
